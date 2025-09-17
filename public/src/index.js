@@ -1,4 +1,19 @@
 import './styles/main.scss';
+import { createProductCard } from './js/components/productCard';
+
+//Import product images (Webpack copies them into dist/assets/images)
+import chicken from './assets/images/chicken.png';
+
+// Product data
+const products = [
+  { title: 'Premium Dog Food', image: chicken, price: '£29.99' }
+];
+
+// Render into page
+const container = document.querySelector('#products');
+products.forEach((product) => {
+  container.appendChild(createProductCard(product));
+});
 
 // Small helper to toggle classes and manage focus restoration
 const qs = sel => document.querySelector(sel);
