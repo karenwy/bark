@@ -5,7 +5,8 @@
   position: fixed;
   top: 0;
   right: 0;
-  height: 100vh;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* Modern browsers */
   width: 92vw;           
   max-width: 420px;
   background: white;
