@@ -1,0 +1,28 @@
+// COLORS
+$color-bg: #EBF6F8;
+$color-accent: #FF5C00;
+$color-text: #000000;
+$color-muted: #EBEBEB;
+$color-white: #FFFFFF;
+$color-grey: #808080;
+
+// TYPOGRAPHY
+$font-primary: 'Open Sans', sans-serif;
+$font-heading: 'Roboto', sans-serif;
+
+$font-size-base: 16px;
+$font-size-sm: 0.875rem;  // 14px
+$font-size-md: 1rem;      // 16px
+$font-size-lg: 1.25rem;   // 20px
+$font-size-xl: 1.5rem;    // 24px
+$font-size-xxl: 2rem;     // 32px
+
+// BREAKPOINTS
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px
+);
+
+$desktop-header-height: 100px;

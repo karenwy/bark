@@ -1,0 +1,151 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'components/button';
+@use 'components/product-card';
+@use 'components/cart';
+
+/* Base */
+:root {
+  font-family: $font-primary;
+  --site-max: 1300px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5;
+  scroll-behavior: smooth;
+}
+
+/* Basic elements */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-heading;
+  font-weight: 500;
+  line-height: 1.2;
+  margin: 0;
+  padding: 10px 0;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+a {
+  color: inherit;
+  text-transform: uppercase;
+  font-size: $font-size-sm;
+  pointer-events: none; // disable clicking/refreshing on links for this project
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.page { background: $color-bg; color: $color-text; }
+
+section {
+  padding: 50px 0;
+}
+
+.container {
+  padding: 0 20px;
+  max-width: var(--site-max);
+  margin: 0 auto;
+}
+
+/* Header */
+.site-header {
+    background: $color-white;
+    padding: 20px 0;
+
+    @include respond(lg) {
+      position: relative;
+      background: none;
+      height: $desktop-header-height;
+      z-index: 1;
+    }
+
+    &__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__logo {
+      width: 30%;
+      max-width: 120px;
+    }
+    &__bag {
+      width: 30px;
+      height: 30px;
+      font-size: $font-size-sm;
+      text-align: center;
+      background: url('../assets/images/bag.svg') no-repeat center center;
+      background-size: contain;
+      padding-top: 8px;
+      cursor: pointer;
+    }
+}
+
+/* Main */
+main {
+
+  .container{
+    max-width: 350px;
+  }
+  @include respond(lg) {
+    position:absolute;
+    top: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+
+    section {
+      padding-top: $desktop-header-height;
+
+      .container{
+        max-width: 500px;
+      }
+    }    
+  }
+  /* Hero */
+  .hero {
+      background: white;
+      text-align: center;
+      min-height: 30vh;
+      display: flex;
+      align-items: center;
+
+      @include respond(lg) {
+        height: 100%;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: $font-size-xxl;
+        margin-bottom: 1rem;
+      }
+      p {
+        color: $color-grey;
+      }
+  }
+
+  /* Product */
+  .product {
+
+    .product-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

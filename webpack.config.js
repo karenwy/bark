@@ -2,44 +2,99 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+
+const isProd = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './public/src/index.js',   // entry file
   output: {
     filename: 'bundle.[contenthash].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/',                // dev server
   },
+  devtool: isProd ? false : 'source-map',
   devServer: {
     static: './dist',
     hot: true,
     port: 8080,
+    open: true,
   },
   module: {
     rules: [
-      { // JS
+      // JS with Babel
+      {
         test: /\.m?js$/,
         exclude: /node_modules/,
-        use: { loader: 'babel-loader' }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'], // transpile modern JS
+          },
+        },
+        type: 'javascript/auto' // fixes "sourceType" errors
       },
-      { // SASS
+      // SCSS
+      {
         test: /\.s[ac]ss$/i,
         use: [
-          MiniCssExtractPlugin.loader, // extract CSS in prod
-          'css-loader',
-          'postcss-loader', // autoprefixer
-          'sass-loader'
+          isProd ? MiniCssExtractPlugin.loader : 'style-loader', // inject in dev, extract in prod
+          'css-loader',        // turns CSS into JS modules
+          'postcss-loader',    // autoprefixer
+          'sass-loader',       // compiles Sass to CSS
         ],
       },
-      { // images
-        test: /\.(png|jpe?g|svg|gif)$/i,
-        type: 'asset/resource'
-      }
-    ]
+      //HTML (<img src="...">)
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: {
+          sources: {
+            list: [
+              '...', // keep the defaults
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+              },
+              {
+                tag: 'img',
+                attribute: 'srcset',
+                type: 'srcset',
+              }
+            ],
+          },
+        },
+      },
+      // Images
+      {
+        test: /\.(png|jpe?g|gif|svg)$/i,
+        type: 'asset/resource', // handle images
+        generator: {
+          filename: 'assets/images/[name][hash][ext][query]', // copies into dist/assets/images
+        },
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)$/i,
+        type: 'asset/resource', // handle fonts
+      },
+    ],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: './public/index.html' }),
-    new MiniCssExtractPlugin({ filename: 'styles.[contenthash].css' })
-  ]
+    new HtmlWebpackPlugin({
+      template: './public/index.html', // HTML template
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'styles.[contenthash].css',
+    }),
+  ],
+  optimization: {
+    minimize: isProd,
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin(),
+    ],
+  },
 };

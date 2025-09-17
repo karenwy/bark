@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Bark</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/png" href="./src/assets/images/favicons/favicon-96x96.png" sizes="96x96" />
+  <link rel="icon" type="image/svg+xml" href="./src/assets/images/favicons/favicon.svg" />
+  <link rel="shortcut icon" href="./src/assets/images/favicons/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="./src/assets/images/favicons/apple-touch-icon.png" />
+
+</head>
+<body class="page">
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <h1 class="site-header__logo"><img src="./src/assets/images/logo.svg" alt="Bark logo"></h1>
+      <div class="site-header__bag js-open-cart" aria-label="Open cart">1</div>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="hero">
+      <div class="container">
+        <h1>Ornare Vulputate Elit</h1>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui soluta illum ipsam amet earum. Laudantium in mollitia iste placeat facere aliquid, accusamus aperiam, quisquam natus temporibus illo doloribus, nihil illum.</p>
+      </div>
+    </section>
+    <section class="product">
+      <!-- Product card(s) -->
+      <div class="container product-list">
+        <article class="product-card">
+          <img class="product-card__img" src="./src/assets/images/chicken.png" alt="Dog food">
+          <div class="product-card__body">
+            <h2 class="product-card__title">Natures Menu Dog Food Can Chicken</h2>
+            <p class="product-card__price">£22.81</p>
+            <button class="btn btn--primary js-add-to-bag" data-product-id="sku-123">Add to bag</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Cart overlay + drawer -->
+  <div class="overlay js-overlay"></div>
+
+  <aside class="cart js-cart" aria-hidden="true">
+    <div class="cart__header">
+      <h3 class="cart__title">Your Bag</h3>
+      <button class="cart__close js-cart-close" aria-label="Close cart"></button>
+    </div>
+    <div class="cart__content">
+      <!-- Pre-populated items -->
+      <ul class="cart__items">
+        <li class="cart-item">
+          <img src="./src/assets/images/chicken_thumb.png" alt="product thumbnail" class="cart-item__img">
+          <div class="cart-item__meta">
+            <div class="cart-item__title">Natures Menu Dog Food Can Chicken</div>
+            <div class="cart-item__price">£22.81</div>
+            <p><a href="">Remove</a></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="cart__footer">
+      <p>Subtotal: £22.81</p>
+      <button class="btn btn--primary" disabled>Proceed to Checkout</button>
+      <p><a href="">Continue Shopping</a></p>
+    </div>
+  </aside>
+</body>
+</html>
